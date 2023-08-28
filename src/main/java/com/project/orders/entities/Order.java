@@ -3,18 +3,23 @@ package com.project.orders.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.project.orders.entities.enums.OrderStatus;
+
 public class Order implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private Long id;
     private Instant moment;
 
+    private Integer orderStatus;
+
     public Order(){
     }
 
-    public Order(Long id, Instant moment) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus) {
         this.id = id;
         this.moment = moment;
+        setOrderStatus(orderStatus);
     }
 
     public Long getId() {
@@ -31,6 +36,16 @@ public class Order implements Serializable{
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
+
+    public void setOrderStatus(OrderStatus orderStatus){
+        if (orderStatus != null){
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 
     @Override
