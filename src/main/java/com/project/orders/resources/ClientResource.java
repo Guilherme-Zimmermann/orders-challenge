@@ -13,7 +13,7 @@ import com.project.orders.Services.ClientService;
 import com.project.orders.entities.Client;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = "clients")
 public class ClientResource {
     
     @Autowired
