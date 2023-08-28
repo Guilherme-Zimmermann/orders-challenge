@@ -1,4 +1,4 @@
-package com.project.orders.entities;
+package com.project.orders.model.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;

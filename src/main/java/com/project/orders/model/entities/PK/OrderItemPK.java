@@ -1,9 +1,9 @@
-package com.project.orders.entities.PK;
+package com.project.orders.model.entities.PK;
 
 import java.io.Serializable;
 
-import com.project.orders.entities.Order;
-import com.project.orders.entities.Product;
+import com.project.orders.model.entities.Order;
+import com.project.orders.model.entities.Product;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;

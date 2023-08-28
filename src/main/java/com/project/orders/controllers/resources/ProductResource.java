@@ -1,4 +1,4 @@
-package com.project.orders.resources;
+package com.project.orders.controllers.resources;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.orders.Services.ProductService;
-import com.project.orders.entities.Product;
+import com.project.orders.controllers.Services.ProductService;
+import com.project.orders.model.entities.Product;
 
 @RestController
 @RequestMapping(value = "/products")

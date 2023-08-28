@@ -1,4 +1,4 @@
-package com.project.orders.resources.exceptions;
+package com.project.orders.controllers.resources.exceptions;
 
 import java.time.Instant;
 
@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.project.orders.Services.exceptions.DatabaseException;
-import com.project.orders.Services.exceptions.ResourceNotFoundException;
+import com.project.orders.controllers.Services.exceptions.DatabaseException;
+import com.project.orders.controllers.Services.exceptions.ResourceNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
 

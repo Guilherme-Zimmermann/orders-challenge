@@ -1,4 +1,4 @@
-package com.project.orders.Services.exceptions;
+package com.project.orders.controllers.Services.exceptions;
 
 public class DatabaseException extends RuntimeException{
     private static final long serialVersionUID = 1L;

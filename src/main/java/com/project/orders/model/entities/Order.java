@@ -1,41 +1,48 @@
-package com.project.orders.entities;
+package com.project.orders.model.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.orders.model.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "products")
-public class Product implements Serializable{
+@Table(name = "orders")
+public class Order implements Serializable{
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
-    private Double price;
+    private Instant moment;
 
-    @OneToMany(mappedBy = "id.product")
+    private Integer orderStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
-    
-    public Product(){
+
+    public Order(){
     }
 
-    public Product(Long id, String title, String description, Double price) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus, Client client) {
         this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
+        this.moment = moment;
+        setOrderStatus(orderStatus);
+        this.client = client;
     }
 
     public Long getId() {
@@ -46,37 +53,34 @@ public class Product implements Serializable{
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Instant getMoment() {
+        return moment;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMoment(Instant moment) {
+        this.moment = moment;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    @JsonIgnore
-    public Set<Order> getOrders() {
-        Set<Order> set = new HashSet<>();
-        for (OrderItem x : items){
-            set.add(x.getOrder());
+    public void setOrderStatus(OrderStatus orderStatus){
+        if (orderStatus != null){
+            this.orderStatus = orderStatus.getCode();
         }
-        return set;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
@@ -95,7 +99,7 @@ public class Product implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Product other = (Product) obj;
+        Order other = (Order) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

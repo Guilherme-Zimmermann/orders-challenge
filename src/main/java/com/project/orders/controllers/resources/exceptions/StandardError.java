@@ -1,9 +1,9 @@
-package com.project.orders.resources.exceptions;
+package com.project.orders.controllers.resources.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;
 
-public class ExceptionHandler implements Serializable{
+public class StandardError implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Instant timestamp;
@@ -12,10 +12,10 @@ public class ExceptionHandler implements Serializable{
     private String message;
     private String path;
 
-    public ExceptionHandler(){
+    public StandardError(){
     }
 
-    public ExceptionHandler(Instant timestamp, Integer status, String error, String message, String path) {
+    public StandardError(Instant timestamp, Integer status, String error, String message, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;

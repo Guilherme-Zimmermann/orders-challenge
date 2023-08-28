@@ -1,9 +1,9 @@
-package com.project.orders.entities;
+package com.project.orders.model.entities;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.orders.entities.PK.OrderItemPK;
+import com.project.orders.model.entities.PK.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
