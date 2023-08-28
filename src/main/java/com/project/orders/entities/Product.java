@@ -1,14 +1,32 @@
 package com.project.orders.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "products")
 public class Product implements Serializable{
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
     private Double price;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
     
     public Product(){
     }
@@ -50,6 +68,15 @@ public class Product implements Serializable{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items){
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override

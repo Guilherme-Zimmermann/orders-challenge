@@ -2,24 +2,47 @@ package com.project.orders.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.project.orders.entities.enums.OrderStatus;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "orders")
 public class Order implements Serializable{
     private static final long serialVersionUID = 1L;
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant moment;
 
     private Integer orderStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
+
     public Order(){
     }
 
-    public Order(Long id, Instant moment, OrderStatus orderStatus) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus, Client client) {
         this.id = id;
         this.moment = moment;
         setOrderStatus(orderStatus);
+        this.client = client;
     }
 
     public Long getId() {
@@ -46,6 +69,18 @@ public class Order implements Serializable{
         if (orderStatus != null){
             this.orderStatus = orderStatus.getCode();
         }
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
