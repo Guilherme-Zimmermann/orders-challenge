@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +26,21 @@ public class ClientResource {
     @Autowired
     private ClientService service;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
     public ResponseEntity<List<Client>> findAll(){
         List<Client> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Client> findById(@PathVariable Long id){
         Client client = service.findById(id);
         return ResponseEntity.ok().body(client);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public ResponseEntity<Client> insert(@RequestBody Client client){
         service.insert(client);
@@ -44,12 +48,14 @@ public class ClientResource {
         return ResponseEntity.created(uri).body(client);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client){
         client = service.update(id, client);
