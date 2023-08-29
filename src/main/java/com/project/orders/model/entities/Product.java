@@ -24,6 +24,7 @@ public class Product implements Serializable{
     private String title;
     private String description;
     private Double price;
+    private String imgUrl;
 
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
@@ -31,11 +32,12 @@ public class Product implements Serializable{
     public Product(){
     }
 
-    public Product(Long id, String title, String description, Double price) {
+    public Product(Long id, String title, String description, Double price, String imgUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
+        this.imgUrl = imgUrl;
     }
 
     public Long getId() {
@@ -68,6 +70,14 @@ public class Product implements Serializable{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+    
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     @JsonIgnore

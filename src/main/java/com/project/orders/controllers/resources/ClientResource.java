@@ -19,7 +19,7 @@ import com.project.orders.controllers.Services.ClientService;
 import com.project.orders.model.entities.Client;
 
 @RestController
-@RequestMapping(value = "clients")
+@RequestMapping(value = "/clients")
 public class ClientResource {
     
     @Autowired
