@@ -14,6 +14,7 @@ export function Card({ title, description, price, imgUrl } : CardProps){
             <h2>{title}</h2>
             <p>{description}</p>
             <p><b>Preço: </b>{price}</p>
+            <button className="btn-buy">Adicionar ao carrinho</button>
         </div>
     )
 }

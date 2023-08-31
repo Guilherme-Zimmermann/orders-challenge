@@ -5,6 +5,7 @@ import { MenuData } from "../../interface/MenuData";
 import "./modal.css"
 
 interface InputProps {
+    type: string,
     label: string,
     value: string | number,
     updateValue(value: any): void
@@ -31,14 +32,17 @@ export function CreateModal({ closeModal }: ModalProps){
     const { mutate, isSuccess } = useMenuDataMutate();
 
     const submit = () => {
-        const menuData: MenuData = {
-            title,
-            description,
-            price,
-            imgUrl
+        if (title && description && price && imgUrl != null){
+            const menuData: MenuData = {
+                title,
+                description,
+                price,
+                imgUrl
+            }
+            mutate(menuData)
         }
-        mutate(menuData)
     }
+    
 
     useEffect(() => {
         if(!isSuccess) return
@@ -50,12 +54,37 @@ export function CreateModal({ closeModal }: ModalProps){
             <div className="modal-body">
                 <h2>Cadastre um novo item no cardápio</h2>
                 <form className="input-container">
-                    <Input label="Título" value={title} updateValue={setTitle}/>
-                    <Input label="Descrição" value={description} updateValue={setDescription}/>
-                    <Input label="Preço" value={price} updateValue={setPrice}/>
-                    <Input label="Imagem" value={imgUrl} updateValue={setImgUrl}/>
+                    <Input 
+                        type="title" 
+                        label="Título" 
+                        value={title} 
+                        updateValue={setTitle}
+                    />
+
+                    <Input 
+                        type="description" 
+                        label="Descrição" 
+                        value={description} 
+                        updateValue={setDescription}
+                    />
+                    
+                    <Input 
+                        type="number" 
+                        label="Preço" 
+                        value={price} 
+                        updateValue={setPrice}
+                    />
+
+                    <Input 
+                        type="image" 
+                        label="Imagem (Somente URL, Ex: http://minha-imagem)" 
+                        value={imgUrl} 
+                        updateValue={setImgUrl}
+                    />
                 </form>
-                <button onClick={submit} className="btn-secondary">Postar</button>
+                <button onClick={submit} className="btn-secondary">Salvar</button>
+                
+
             </div>
         </div>
     )
