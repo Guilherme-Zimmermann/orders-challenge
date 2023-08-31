@@ -34,3 +34,4 @@ Para rodar junto com o back-end necessitará dar run no spring.
 ## Licença
 
 Esse projeto está sendo licenciado pelo MIT, consulte `LICENCE` para obter mais informações.
+
